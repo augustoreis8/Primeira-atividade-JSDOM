@@ -1,16 +1,20 @@
-//Tentei mas não consegui fazer a função para o botão de editar e nem para o de salvar.
-
 function DeleteItem(){
-    console.log(this.parentElement)
     this.parentElement.remove()
 }
 
 function EditItem(){
     
-}
+    item_lista = this.parentElement
+    palavra_digitada=item_lista.innerText.replace("DeleteEdit", "")
+    input_element = document.querySelector('[data-form-input]')
+    input_element.value = palavra_digitada
 
-function ToSaveItem(){
-
+    const botao_submit = document.querySelector('[button-submit')
+    botao_submit.className = 'd-none'
+    
+    const botao_save = document.querySelector('[button-save')
+    botao_save.classList.remove('d-none')
+    
 }
 
 function CriarBotaoDelete(){
@@ -32,15 +36,6 @@ function CriarBotaoEdit(){
 
     return botao_edit
 }
-function CriarBotaToSave(){
-    const botao_tosave = document.createElement('button')
-    botao_tosave.classList.add("btn", "btn-outline-info")
-    botao_tosave.innerHTML ="Salvar"
-    botao_tosave.type ="button"
-    botao_tosave.addEventListener("click", ToSaveItem)
-
-    return botao_tosave
-}
 
 function Submit(){
     const lista = document.querySelector('[data-task]')
@@ -52,15 +47,29 @@ function Submit(){
     novo_item_lista.innerHTML = valor.value
  
     novo_item_lista.appendChild(CriarBotaoDelete())
-    lista.appendChild (novo_item_lista)
     novo_item_lista.appendChild(CriarBotaoEdit())
-    lista.appendChild(novo_item_lista)
-    novo_item_lista.appendChild(CriarBotaToSave())
     lista.appendChild(novo_item_lista)
 
     document.getElementById("item").value = ""
 }
 
+function Save(){
+    
+    nova_palavra_digitada = input_element.value
+    item_lista.innerHTML = nova_palavra_digitada
+
+    item_lista.appendChild(CriarBotaoDelete())
+    item_lista.appendChild(CriarBotaoEdit())
+
+    const botao_submit = document.querySelector('[button-submit')
+    botao_submit.classList.remove('d-none')
+    botao_submit.classList.add('btn', 'btn-outline-dark')
+    
+    const button_save = document.querySelector('[button-save')
+    button_save.classList.add('d-none')
+
+    input_element.value = ''
+}
 
 
 
